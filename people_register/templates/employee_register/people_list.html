@@ -1,0 +1,50 @@
+{% extends "people_register/base.html" %}
+
+
+{% block content %}
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td></td>
+            <td>Email</td>
+            <td>Father's Name</td>
+            <td>Student's Name</td>
+            <td>Father's Occupation</td>
+            <td>Address</td>
+            <td>Mobile</td>
+            <td>College</td>
+            <td>
+                <a href="{% url 'people_insert' %}" class="btn btn-outline-success">
+                    <i class="fas fa-plus"></i> Add New
+                </a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for people in people_list %}
+            <tr>
+                <td>{{people.mobile}</td>
+                <td>{{people.Student}}</td>
+                <td>{{people.Email}}</td>
+                <td>{{people.Father_name}}</td>
+                <td>{{people.Father_occ}}</td>
+                <td>{{people.Address}}</td>
+                <td>{{people.mobile}}</td>
+                <td>{{people.College}}</td>
+                <td>
+                    <a href="{% url 'people_update' people.id %}" class="btn text-secondary px-0">
+                        <i class="far fa-edit fa-lg"></i>
+                    </a>
+                    <form action="{% url 'people_delete' people.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
